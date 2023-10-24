@@ -14,6 +14,7 @@
             </a>
 
             <input type="hidden" id="usu_idx" value="<?php echo $_SESSION["UsuarioID"] ?>">
+            <input type="hidden" id="rol_idx" value="<?php echo $_SESSION["Rol_ID"] ?>">
             <div class="dropdown-menu dropdown-menu-header wd-200">
               <ul class="list-unstyled user-profile-nav">
                 <li><a href="../Usu_Perfil/Index.php"><i class="icon ion-ios-person"></i> Editar Perfil</a></li>

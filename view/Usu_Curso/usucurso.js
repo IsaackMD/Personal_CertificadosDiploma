@@ -1,4 +1,5 @@
-// var UsuarioID = getSelection(UsuarioID);
+var UsuarioID = $('#usu_idx').val();
+
 $(document).ready(function(){
     $('#cursos_data').DataTable({
         "aProcessing": true,
@@ -12,12 +13,12 @@ $(document).ready(function(){
         "ajax":{
             url:"../../controller/usuario.php?op=listar_cursos",
             type:"post",
-            data:{UsuarioID:1},
+            data:{UsuarioID:UsuarioID},
         },
         "bDestroy": true,
         "responsive": true,
         "bInfo": true,
-        "iDisplayLength":10,
+        "iDisplayLength":15,
         "order": [[0,"desc"]],
         "language":{
             "sProcessing":  "Procesando...",

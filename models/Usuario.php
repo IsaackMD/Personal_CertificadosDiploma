@@ -22,6 +22,7 @@
                         $_SESSION["usu_Nombre"]=$resultado["usu_Nombre"];
                         $_SESSION["usu_Apellido_P"]=$resultado["usu_Apellido_P"];
                         $_SESSION["Correo"]=$resultado["Correo"];
+                        $_SESSION["Rol_ID"]=$resultado["Rol_ID"];
                         header("Location:".Conectar::ruta()."view/Usu_Home/");
                     }else{
                         header("Location:".Conectar::ruta()."index.php?m=1");
@@ -58,6 +59,45 @@
                 $sql->execute();
                 return $sql->fetchAll();
         }
+
+        public function get_curso_usuario_top($UsuarioID){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="call Lista_top(?);";
+                $sql=$conectar->prepare($sql);
+                $sql->bindValue(1,$UsuarioID);
+                $sql->execute();
+                return $sql->fetchAll();
+        }
+
+        public function get_usu_x_id($UsuarioID){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql = "call Info_usu(?);";
+            $sql = $conectar->prepare($sql);
+            $sql->bindValue(1,$UsuarioID);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+
+        }
+
+        public function update_usu_x_id($UsuarioID,$usu_Nombre,$usu_apep,$usu_apem,$pass,$sex,$tel){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql = "call actualizar_usu(?,?,?,?,?,?,?);";
+            $sql = $conectar->prepare($sql);
+            $sql->bindValue(2,$usu_Nombre);
+            $sql->bindValue(3,$usu_apep);
+            $sql->bindValue(4,$usu_apem);
+            $sql->bindValue(5,$pass);
+            $sql->bindValue(6,$sex);
+            $sql->bindValue(7,$tel);
+            $sql->bindValue(1,$UsuarioID);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+
+        }
+
     }
 
 ?>

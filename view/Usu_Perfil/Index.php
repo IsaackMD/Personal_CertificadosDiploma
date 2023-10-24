@@ -36,13 +36,69 @@
       </div>
 
       <div class="br-pagebody">
-        <!-- start you own content here -->
+        
+        <div class="form-layout form-layout-1">
+            <div class="row mg-b-25">
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Nombres: <span class="tx-danger">*</span></label>
+                  <input class="form-control" type="text" name="usu_nom" id="usu_nom"  placeholder="Introduce tu nombre">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Apellido Paterno: <span class="tx-danger">*</span></label>
+                  <input class="form-control" type="text" name="usu_apep" id="usu_apep"  placeholder="Introduce tu apellido paterno">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Apellido Materno: <span class="tx-danger">*</span></label>
+                  <input class="form-control" type="text" name="usu_apem" id="usu_apem"  placeholder="Introduce tu apellido materno">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Email: <span class="tx-danger">*</span></label>
+                  <input class="form-control" type="text" name="usu_email" id="usu_email" readonly="true"  placeholder="Introduce tu email">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-5">
+                <div class="form-group">
+                  <label class="form-control-label">Contraseña: <span class="tx-danger">*</span></label>
+                  <input class="form-control" type="text  " name="usu_contr" id="usu_contr" placeholder="Introduce tu contraseña">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group mg-b-10-force">
+                  <label class="form-control-label">Telefono: <span class="tx-danger">*</span></label>
+                  <input class="form-control" type="text" name="usu_tel" id="usu_tel" placeholder="Introduce tu telefono">
+                </div>
+              </div><!-- col-8 -->
+              <div class="col-lg-3 ">
+                <div class="form-group mg-b-10-force">
+                  <label class="form-control-label">Sexo: <span class="tx-danger">*</span></label>
+                  <select class="form-control select2 select2-hidden-accessible" name= "usu_sex" id="usu_sex" data-placeholder="Escoge tu Sexo" tabindex="-1" aria-hidden="true">
+                    <option label="Escoge tu Sexo"></option>
+                    <option value="H">Hombre</option>
+                    <option value="M">Mujer</option>
+
+                  </select>  
+                </div>
+              </div><!-- col-4 -->
+            </div><!-- row -->
+
+            <div class="form-layout-footer">
+              <button id ="btnactualizar" class="btn btn-info">Guardar</button>
+              <button class="btn btn-danger">Cancel</button>
+            </div><!-- form-layout-footer -->
+          </div>
 
       </div><!-- br-pagebody -->
     </div><!-- br-mainpanel -->
     <!-- ########## END: MAIN PANEL ########## -->
-
     <?php require_once('../../view/html/MainJs.php') ?>
+    <script type="text/javascript" src="usuperfil.js"></script>
   </body>
 </html>
 
