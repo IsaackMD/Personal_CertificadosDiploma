@@ -2,14 +2,14 @@
 
 require_once("../config/conexion.php");
 
-require_once("../models/Curso.php");
+require_once("../models/Instructor.php");
 
-$curso = new Curso();
+$instructor = new Instructor();
 
 switch($_GET["op"]){
 
-    case "guardaryeditar":
-        if(empty($_POST["CursoID"])){
+    case "guardad&eitar":
+        if(empty($_POST["cur_id"])){
             $curso->insert_curso($_POST["CategoriaID"],$_POST["Titulo"],$_POST["Descripcion"],$_POST["Fecha_Ini"],$_POST["Fecha_Fin"],$_POST["InstructorID"]);
         }else{
             $curso->update_curso($_POST["CursoID"],$_POST["CategoriaID"],$_POST["Titulo"],$_POST["Descripcion"],$_POST["Fecha_Ini"],$_POST["Fecha_Fin"],$_POST["InstructorID"]);
@@ -38,11 +38,11 @@ switch($_GET["op"]){
         $data=array();
         foreach($datos as $row){
             $sub_array= array();
-            $sub_array[]=$row["Nombre"];
+            $sub_array[]=$row["CategoriaID"];
             $sub_array[]=$row["Titulo"];
             $sub_array[]=$row["Fecha_Ini"];
             $sub_array[]=$row["Fecha_Fin"];
-            $sub_array[]=$row["ins_Nombre"]." ".$row["ins_Apellido_P"]." ".$row["ins_Apellido_M"];
+            $sub_array[]=$row["InstructorID"];
             $sub_array[] = '<button type="button" onClick="editar('.$row["CursoID"].');"  id="'.$row["CursoID"].'" class="btn btn-outline-secondary btn-icon"><div><i class="fa fa-edit"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="eliminar('.$row["CursoID"].');"  id="'.$row["CursoID"].'" class="btn btn-outline-danger btn-icon"><div><i class=" fa fa-regular fa-trash"></i></div></button>';
             $data[]= $sub_array;
@@ -56,5 +56,14 @@ switch($_GET["op"]){
             "aaData"=>$data);
             echo json_encode($results);
         break;
-    
+    case "combo":
+        $datos=$instructor->get_Instructor();
+        if(is_array($datos)==true and count($datos)>0){
+            $html = "<option label='Seleccione Instructor' name= 'InstructorID' id='InstructorID'></option>";
+            foreach($datos as $row){
+                $html.= "<option value = '".$row['InstructorID']."'>".$row['ins_Nombre']." ".$row['ins_Apellido_P']." ".$row['ins_Apellido_M']."</option>";
+            }
+            echo $html;
+        }
+        break;
 }

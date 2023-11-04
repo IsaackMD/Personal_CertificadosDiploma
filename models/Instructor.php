@@ -1,27 +1,27 @@
 <?php 
- class Curso extends Conectar{
-    public function insert_curso($CategoriaID,$Titulo,$Descripcion,$Fecha_Ini,$Fecha_Fin,$InstructorID){
+ class Instructor extends Conectar{
+    public function insert_Instructor($cat_id,$titulo,$descrip,$fechini,$fechfin,$ins_id){
         $conectar= parent::conexion();
         parent::set_names();
-        $sql="call Insertar_cursos(?,?,?,?,?,?);";
-        $sql=$conectar->prepare($sql);
-        $sql->bindValue(1, $CategoriaID);
-        $sql->bindValue(2, $Titulo);
-        $sql->bindValue(3, $Descripcion);
-        $sql->bindValue(4, $Fecha_Ini);
-        $sql->bindValue(5, $Fecha_Fin);
-        $sql->bindValue(6, $InstructorID);
-        $sql->execute();
-        return $sql->fetchAll();
-    }
-    public function update_curso($cur_id,$cat_id,$titulo,$descrip,$fechini,$fechfin,$ins_id){
-        $conectar= parent::conexion();
-        parent::set_names();
-        $sql="call actualizar_cursos(?,?,?,?,?,?,?);";
+        $sql="CALL Insertar_cursos(?, ?, ?, ?, ?, ?);";
         $sql=$conectar->prepare($sql);
         $sql->bindValue(1,$cat_id);
         $sql->bindValue(2,$titulo);
-        $sql->bindValue(3,$descrip);
+        $sql->bindValue(3,$$descrip);
+        $sql->bindValue(4,$fechini);
+        $sql->bindValue(5,$fechfin);
+        $sql->bindValue(6,$ins_id);
+        $sql->execute();
+        return $sql->fetchAll();
+    }
+    public function update_Instructor($cat_id,$titulo,$descrip,$fechini,$fechfin,$ins_id,$cur_id){
+        $conectar= parent::conexion();
+        parent::set_names();
+        $sql="CALL actualizar_cursos(?, ?, ?, ?, ?, ?,?);";
+        $sql=$conectar->prepare($sql);
+        $sql->bindValue(1,$cat_id);
+        $sql->bindValue(2,$titulo);
+        $sql->bindValue(3,$$descrip);
         $sql->bindValue(4,$fechini);
         $sql->bindValue(5,$fechfin);
         $sql->bindValue(6,$ins_id);
@@ -29,7 +29,7 @@
         $sql->execute();
         return $sql->fetchAll();
     }
-    public function delete_curso($CursoID){
+    public function delete_Instructor($CursoID){
         $conectar= parent::conexion();
         parent::set_names();
         $sql="UPDATE curso
@@ -40,16 +40,16 @@
             $sql->execute();
             return $sql->fetchAll();
     }
-    public function get_curso(){
+    public function get_Instructor(){
         $conectar= parent::conexion();
         parent::set_names();
-        $sql="CALL listarCursos();";
+        $sql="SELECT * FROM Instructor Where Estado = 1";
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $sql->fetchAll();
 
     }
-    public function get_curso_id($CursoID){
+    public function get_Instructor_id($CursoID){
             $conectar= parent::conexion();
             parent::set_names();
             $sql="SELECT * FROM curso Where Estado = 1 and CursoID = ?";

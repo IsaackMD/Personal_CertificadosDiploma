@@ -46,7 +46,7 @@
             <table id="cursos_data" class="table display responsive nowrap">
               <thead>
                 <tr>
-                  <th class="wd-15p">Curso</th>
+                  <th class="wd-15p">Curso:</th>
                   <th class="wd-15p">Fecha Inicio</th>
                   <th class="wd-20p">Fecha Fin</th>
                   <th class="wd-15p">instructor</th>

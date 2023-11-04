@@ -52,3 +52,9 @@ $(document).ready(function(){
         },
     });
 });
+
+function certificado(CursoDetalleID){
+    window.open("../Certificado/index.php?CursoDetalleID="+CursoDetalleID,"_blank");
+    console.log(CursoDetalleID);
+}
+
