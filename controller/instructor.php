@@ -4,47 +4,48 @@ require_once("../config/conexion.php");
 
 require_once("../models/Instructor.php");
 
-$instructor = new Instructor();
+$Instructor = new Instructor();
 
 switch($_GET["op"]){
 
-    case "guardad&eitar":
-        if(empty($_POST["cur_id"])){
-            $curso->insert_curso($_POST["CategoriaID"],$_POST["Titulo"],$_POST["Descripcion"],$_POST["Fecha_Ini"],$_POST["Fecha_Fin"],$_POST["InstructorID"]);
+    case "guardayeditar":
+        if(empty($_POST["InstructorID"])){
+            $Instructor->insert_Instructor($_POST["ins_Nombre"],$_POST["ins_Apellido_P"],$_POST["ins_Apellido_M"],$_POST["Correo"],$_POST["Sexo"],$_POST["Telefono"]);
         }else{
-            $curso->update_curso($_POST["CursoID"],$_POST["CategoriaID"],$_POST["Titulo"],$_POST["Descripcion"],$_POST["Fecha_Ini"],$_POST["Fecha_Fin"],$_POST["InstructorID"]);
+            $Instructor->update_Instructor($_POST["InstructorID"],$_POST["ins_Nombre"],$_POST["ins_Apellido_P"],$_POST["ins_Apellido_M"],$_POST["Correo"],$_POST["Sexo"],$_POST["Telefono"]);
         }
         break;
     case "mostrar":
-        $datos =  $curso->get_curso_id($_POST["CursoID"]);
+        $datos =  $Instructor->get_Instructor_id($_POST["InstructorID"]);
         if(is_array($datos)==true and count($datos)<>0){
             foreach($datos as $row){
-                $output["CursoID"]=$row["CursoID"];
-                $output["CategoriaID"]=$row["CategoriaID"];
-                $output["Titulo"]=$row["Titulo"];
-                $output["Descripcion"]=$row["Descripcion"];
-                $output["Fecha_Ini"]=$row["Fecha_Ini"];
-                $output["Fecha_Fin"]=$row["Fecha_Fin"];
                 $output["InstructorID"]=$row["InstructorID"];
+                $output["ins_Nombre"]=$row["ins_Nombre"];
+                $output["ins_Apellido_P"]=$row["ins_Apellido_P"];
+                $output["ins_Apellido_M"]=$row["ins_Apellido_M"];
+                $output["Correo"]=$row["Correo"];
+                $output["Sexo"]=$row["Sexo"];
+                $output["Telefono"]=$row["Telefono"];
+
             }
             echo json_encode($output);
         }
         break;
     case "eliminar":
-        $curso->delete_curso($_POST["CursoID"]);
+        $Instructor->delete_Instructor($_POST["InstructorID"]);
         break;
     case "listar":
-        $datos = $curso->get_curso();
+        $datos = $Instructor->get_Instructor();
         $data=array();
         foreach($datos as $row){
             $sub_array= array();
-            $sub_array[]=$row["CategoriaID"];
-            $sub_array[]=$row["Titulo"];
-            $sub_array[]=$row["Fecha_Ini"];
-            $sub_array[]=$row["Fecha_Fin"];
-            $sub_array[]=$row["InstructorID"];
-            $sub_array[] = '<button type="button" onClick="editar('.$row["CursoID"].');"  id="'.$row["CursoID"].'" class="btn btn-outline-secondary btn-icon"><div><i class="fa fa-edit"></i></div></button>';
-            $sub_array[] = '<button type="button" onClick="eliminar('.$row["CursoID"].');"  id="'.$row["CursoID"].'" class="btn btn-outline-danger btn-icon"><div><i class=" fa fa-regular fa-trash"></i></div></button>';
+            $sub_array[]=$row["ins_Nombre"];
+            $sub_array[]=$row["ins_Apellido_P"];
+            $sub_array[]=$row["ins_Apellido_M"];
+            $sub_array[]=$row["Correo"];
+            $sub_array[]=$row["Telefono"];
+            $sub_array[] = '<button type="button" onClick="editar('.$row["InstructorID"].');"  id="'.$row["InstructorID"].'" class="btn btn-outline-secondary btn-icon"><div><i class="fa fa-edit"></i></div></button>';
+            $sub_array[] = '<button type="button" onClick="eliminar('.$row["InstructorID"].');"  id="'.$row["InstructorID"].'" class="btn btn-outline-danger btn-icon"><div><i class=" fa fa-regular fa-trash"></i></div></button>';
             $data[]= $sub_array;
 
         }
@@ -57,11 +58,11 @@ switch($_GET["op"]){
             echo json_encode($results);
         break;
     case "combo":
-        $datos=$instructor->get_Instructor();
+        $datos=$Instructor->get_Instructor();
         if(is_array($datos)==true and count($datos)>0){
             $html = "<option label='Seleccione Instructor' name= 'InstructorID' id='InstructorID'></option>";
             foreach($datos as $row){
-                $html.= "<option value = '".$row['InstructorID']."'>".$row['ins_Nombre']." ".$row['ins_Apellido_P']." ".$row['ins_Apellido_M']."</option>";
+                $html.= "<option value = '".$row['Sexo']."'>".$row['ins_Nombre']." ".$row['ins_Apellido_P']." ".$row['ins_Apellido_M']."</option>";
             }
             echo $html;
         }
