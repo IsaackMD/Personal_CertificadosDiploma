@@ -36,13 +36,13 @@
       </div>
 
       <div class="br-pagebody">
-        
+      <input type="hidden" name="UsuarioID" id="UsuarioID"/>
         <div class="form-layout form-layout-1">
             <div class="row mg-b-25">
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Nombres: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" name="usu_nom" id="usu_nom"  placeholder="Introduce tu nombre">
+                  <input class="form-control" type="text" name="usu_Nom" id="usu_Nom"  placeholder="Introduce tu nombre">
                 </div>
               </div><!-- col-4 -->
               <div class="col-lg-4">

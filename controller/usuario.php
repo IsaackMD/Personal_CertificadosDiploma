@@ -85,7 +85,7 @@ $usuario = new Usuario();
 
 
 
-        case "mostrar_Usuario":
+        case "mostrar":
             $datos = $usuario->get_usu_x_id($_POST["UsuarioID"]);
             if(is_array($datos)==true and count($datos)<>0){
                 foreach($datos as $row){
@@ -97,25 +97,63 @@ $usuario = new Usuario();
                     $output["Password"] = $row["Password"];
                     $output["Telefono"] = $row["Telefono"];
                     $output["Sexo"] = $row["Sexo"];
+                    $output["Rol_ID"] = $row["Rol_ID"];
                 }
                 echo json_encode($output);
             }
             break;
-            
-            // $UsuarioID,$usu_Nombre,$usu_apep,$usu_apem,$pass,$sex,$tel
+        case "guardayedita":
+            if(empty($_POST["UsuarioID"])){
+
+                $usuario->insert_usuario($_POST["usu_Nombre"],$_POST["usu_Apellido_P"],$_POST["usu_Apellido_M"],$_POST["Correo"],$_POST["Telefono"],$_POST["Password"],$_POST["Sexo"],$_POST["Rol_ID"]);
+            }else{ //$usuid,$nom,$ap,$am,$correo,$pass,$sexo,$tel,$rol
+                $usuario->update_usu($_POST["UsuarioID"],$_POST["usu_Nombre"],$_POST["usu_Apellido_P"],$_POST["usu_Apellido_M"],$_POST["Correo"],$_POST["Password"],$_POST["Telefono"],$_POST["Sexo"],$_POST["Rol_ID"]);
+            }
         case "update_perfil":
-            $usuario->update_usu_x_id(
+            $usuario->update_usu_perfil(
                 $_POST["UsuarioID"],
                 $_POST["usu_Nombre"],
                 $_POST["usu_Apellido_P"],
                 $_POST["usu_Apellido_M"],
                 $_POST["Password"],
-                $_POST["Sexo"],
-                $_POST["Telefono"]
+                $_POST["Telefono"],
+                $_POST["Sexo"]
             );
             break;
-            
-        }
+
+        case "eliminar":
+            $usuario->delete_usu($_POST["UsuarioID"]);
+            break;
+        case "listar":
+                $datos = $usuario->get_usuarios();
+                $data=array();
+                foreach($datos as $row){
+                    $sub_array= array();
+                    $sub_array[]=$row["usu_Nombre"];
+                    $sub_array[]=$row["usu_Apellido_P"];
+                    $sub_array[]=$row["usu_Apellido_M"];
+                    $sub_array[]=$row["Correo"];
+                    $sub_array[]=$row["Telefono"];
+                    if($row["Rol_ID"]==1){
+                        $sub_array[]="Usuario";
+                    }else{
+                        $sub_array[]="Administrador";
+                    }
+                    $sub_array[] = '<button type="button" onClick="editar('.$row["UsuarioID"].');"  id="'.$row["UsuarioID"].'" class="btn btn-outline-secondary btn-icon"><div><i class="fa fa-edit"></i></div></button>';
+                    $sub_array[] = '<button type="button" onClick="eliminar('.$row["UsuarioID"].');"  id="'.$row["UsuarioID"].'" class="btn btn-outline-danger btn-icon"><div><i class=" fa fa-regular fa-trash"></i></div></button>';
+                    $data[]= $sub_array;
+        
+                }
+        
+                $results = array(
+                    "sEcho"=>1,
+                    "iTotalRecords"=>count($data),
+                    "iTotalDisplayRecords"=>count($data),
+                    "aaData"=>$data);
+                    echo json_encode($results);
+                break;
+}
+
 
 
 ?>

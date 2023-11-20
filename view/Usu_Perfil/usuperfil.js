@@ -1,10 +1,11 @@
 var UsuarioID = $('#usu_idx').val();
 
 $(document).ready(function(){
-    $.post("../../controller/usuario.php?op=mostrar_Usuario",{UsuarioID:UsuarioID}, function(data) {
+    $.post("../../controller/usuario.php?op=mostrar",{UsuarioID:UsuarioID}, function(data) {
         data= JSON.parse(data);
         console.log(data);
-        $('#usu_nom').val(data.usu_Nombre);
+        $('#UsuarioID').val(data.UsuarioID);
+        $('#usu_Nombre').val(data.usu_Nombre);
         $('#usu_apep').val(data.usu_Apellido_P);
         $('#usu_apem').val(data.usu_Apellido_M);
         $('#usu_email').val(data.Correo);

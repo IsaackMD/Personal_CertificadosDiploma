@@ -81,7 +81,64 @@
 
         }
 
-        public function update_usu_x_id($UsuarioID,$usu_Nombre,$usu_apep,$usu_apem,$pass,$sex,$tel){
+        public function insert_usuario($nom,$ap,$am,$correo,$tel,$pass,$s,$rol){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="Insert into usuario (usu_Nombre,usu_Apellido_P,usu_Apellido_M,Correo,Telefono,Password,Sexo,Fecha_Registro,Estado,Rol_ID) value (?,?,?,?,?,?,?,now(),1,?);";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$nom);
+            $sql->bindValue(2,$ap);
+            $sql->bindValue(3,$am);
+            $sql->bindValue(4,$correo);
+            $sql->bindValue(5,$tel);
+            $sql->bindValue(6,$pass);
+            $sql->bindValue(7,$s);
+            $sql->bindValue(8,$rol);
+            $sql->execute();
+            return $sql->fetchAll();
+        }
+        
+        public function update_usu($usuid,$nom,$ap,$am,$correo,$pass,$tel,$sexo,$rol){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="call actualizar_usu2(?,?,?,?,?,?,?,?,?);";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$usuid);
+            $sql->bindValue(2,$nom);
+            $sql->bindValue(3,$ap);
+            $sql->bindValue(4,$am);
+            $sql->bindValue(5,$correo);
+            $sql->bindValue(6,$pass);
+            $sql->bindValue(7,$sexo);
+            $sql->bindValue(8,$tel);
+            $sql->bindValue(9,$rol);
+            $sql->execute();
+            return $sql->rowCount();
+        }
+        
+        public function delete_usu($UsuarioID){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql = "Update usuario Set Estado = 0 Where UsuarioID=?;";
+            $sql = $conectar->prepare($sql);
+
+            $sql->bindValue(1,$UsuarioID);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+
+        }
+
+        public function get_usuarios(){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql = "select * from usuario where Estado = 1;";
+            $sql = $conectar->prepare($sql);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+
+        }
+
+        public function update_usu_perfil($UsuarioID,$usu_Nombre,$usu_apep,$usu_apem,$pass,$sex,$tel){
             $conectar= parent::conexion();
             parent::set_names();
             $sql = "call actualizar_usu(?,?,?,?,?,?,?);";
@@ -97,7 +154,6 @@
             return $resultado = $sql->fetchAll();
 
         }
-
     }
 
 ?>
