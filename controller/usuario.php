@@ -124,27 +124,16 @@ $usuario = new Usuario();
         case "eliminar":
             $usuario->delete_usu($_POST["UsuarioID"]);
             break;
-        case "listar":
-                $datos = $usuario->get_usuarios();
+        case "listarus":
+                $datos = $usuario->get_usuarios_modal($_POST["CursoID"]);
                 $data=array();
                 foreach($datos as $row){
                     $sub_array= array();
-                    $sub_array[]=$row["usu_Nombre"];
-                    $sub_array[]=$row["usu_Apellido_P"];
-                    $sub_array[]=$row["usu_Apellido_M"];
+                    $sub_array[]= "<input type='checkbox' name= 'detallechek[]' value='".$row['UsuarioID'] ."'>";
+                    $sub_array[]=$row["usu_Nombre"]." ".$row["usu_Apellido_P"]." ".$row["usu_Apellido_M"];
                     $sub_array[]=$row["Correo"];
-                    $sub_array[]=$row["Telefono"];
-                    if($row["Rol_ID"]==1){
-                        $sub_array[]="Usuario";
-                    }else{
-                        $sub_array[]="Administrador";
-                    }
-                    $sub_array[] = '<button type="button" onClick="editar('.$row["UsuarioID"].');"  id="'.$row["UsuarioID"].'" class="btn btn-outline-secondary btn-icon"><div><i class="fa fa-edit"></i></div></button>';
-                    $sub_array[] = '<button type="button" onClick="eliminar('.$row["UsuarioID"].');"  id="'.$row["UsuarioID"].'" class="btn btn-outline-danger btn-icon"><div><i class=" fa fa-regular fa-trash"></i></div></button>';
                     $data[]= $sub_array;
-        
                 }
-        
                 $results = array(
                     "sEcho"=>1,
                     "iTotalRecords"=>count($data),
@@ -152,6 +141,36 @@ $usuario = new Usuario();
                     "aaData"=>$data);
                     echo json_encode($results);
                 break;
+
+        case "listar":
+            $datos = $usuario->get_usuarios();
+            $data=array();
+            foreach($datos as $row){
+                $sub_array= array();
+                $sub_array[]=$row["usu_Nombre"];
+                $sub_array[]=$row["usu_Apellido_P"];
+                $sub_array[]=$row["usu_Apellido_M"];
+                $sub_array[]=$row["Correo"];
+                $sub_array[]=$row["Telefono"];
+                if($row["Rol_ID"]==1){
+                    $sub_array[]="Usuario";
+                }else{
+                    $sub_array[]="Administrador";
+                }
+                $sub_array[] = '<button type="button" onClick="editar('.$row["UsuarioID"].');"  id="'.$row["UsuarioID"].'" class="btn btn-outline-secondary btn-icon"><div><i class="fa fa-edit"></i></div></button>';
+                $sub_array[] = '<button type="button" onClick="eliminar('.$row["UsuarioID"].');"  id="'.$row["UsuarioID"].'" class="btn btn-outline-danger btn-icon"><div><i class=" fa fa-regular fa-trash"></i></div></button>';
+                $data[]= $sub_array;
+    
+            }
+    
+            $results = array(
+                "sEcho"=>1,
+                "iTotalRecords"=>count($data),
+                "iTotalDisplayRecords"=>count($data),
+                "aaData"=>$data);
+                echo json_encode($results);
+            break;
+
 }
 
 

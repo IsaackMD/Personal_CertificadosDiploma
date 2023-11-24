@@ -104,10 +104,11 @@ function editar(CursoID){
     $('#modalmantenimiento').modal('show');
 }
 function eliminar(CursoID){
+    
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
-          confirmButton: 'btn btn-success',
-          cancelButton: 'btn btn-danger'
+          confirmButton: 'btn btn-success m-2',
+          cancelButton: 'btn btn-danger m-2'
         },
         buttonsStyling: false
       })

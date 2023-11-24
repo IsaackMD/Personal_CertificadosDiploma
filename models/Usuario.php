@@ -138,6 +138,16 @@
 
         }
 
+        public function get_usuarios_modal($cur_ID){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql = "select * from usuario where Estado = 1 and UsuarioID not in (select UsuarioID from curso_usu where CursoID=? and Estado =1) ;";
+            $sql = $conectar->prepare($sql);
+            $sql->bindValue(1,$cur_ID);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+
+        }
         public function update_usu_perfil($UsuarioID,$usu_Nombre,$usu_apep,$usu_apem,$pass,$sex,$tel){
             $conectar= parent::conexion();
             parent::set_names();

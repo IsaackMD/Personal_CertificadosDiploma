@@ -26,7 +26,7 @@
                 <span class="menu-item-label">Mant. Usuario</span>
               </div><!-- menu-item -->
             </a><!-- br-menu-link -->
-            <a href="../AdminMntCursos/" class="br-menu-link">
+            <a href="../AdminMntDetallesCertificado/" class="br-menu-link">
               <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
                 <span class="menu-item-label">Mant. Cursos</span>
@@ -44,7 +44,7 @@
                 <span class="menu-item-label">Mant. Categoria</span>
               </div><!-- menu-item -->
             </a><!-- br-menu-link -->
-            <a href="../AdminMntDetallesCertificado/" class="br-menu-link">
+            <a href="../AdminMntCursos/" class="br-menu-link">
               <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
                 <span class="menu-item-label">Detalle Certificado</span>

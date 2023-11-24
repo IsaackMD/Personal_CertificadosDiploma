@@ -40,6 +40,18 @@
             $sql->execute();
             return $sql->fetchAll();
     }
+
+    public function delete_curso_Deta($CursoDetalleID){
+        $conectar= parent::conexion();
+        parent::set_names();
+        $sql="UPDATE curso_usu
+              SET  Estado = 0
+              Where  CursoDetalleID = ?;";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$CursoDetalleID);
+            $sql->execute();
+            return $sql->fetchAll();
+    }
     public function get_curso(){
         $conectar= parent::conexion();
         parent::set_names();
@@ -57,6 +69,29 @@
             $sql->bindValue(1,$CursoID);
             $sql->execute();
             return $sql->fetchAll();
+    }
+
+    public function get_curso_x_curid($CursoID){
+        $conectar= parent::conexion();
+        parent::set_names();
+        $sql="CALL `Listar_Curso_x_curid`(?);";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$CursoID);
+            $sql->execute();
+            return $sql->fetchAll();
+    }
+
+    public function insert_CS($cur_id,$usu_ID){
+        $conectar= parent::conexion();
+        parent::set_names();
+        $sql="INSERT INTO `curso_usu` (`CursoDetalleID`, `CursoID`, `UsuarioID`, `Fecha_Registro`, `Estado`) VALUES (NULL, ?, ?, now(), '1');";
+        $sql=$conectar->prepare($sql);
+        $sql->bindValue(1,$cur_id);
+        $sql->bindValue(2,$usu_ID);
+        $sql->execute();
+        return $sql->fetchAll();
+        // INSERT INTO `curso_usu` (`CursoDetalleID`, `CursoID`, `UsuarioID`, `Fecha_Registro`, `Estado`) VALUES (NULL, ?, ?, now(), '1');
+
     }
  }
 ?>
