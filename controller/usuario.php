@@ -39,6 +39,7 @@ $usuario = new Usuario();
                     $output["Descripcion"] = $row["Descripcion"];
                     $output["Fecha_Ini"] = $row["Fecha_Ini"];
                     $output["Fecha_Fin"] = $row["Fecha_Fin"];
+                    $output["Curso_img"] = $row["Curso_img"];
                     $output["UsuarioID"] = $row["UsuarioID"];
                     $output["usu_Nombre"] = $row["usu_Nombre"];
                     $output["usu_Apellido_P"] = $row["usu_Apellido_P"];

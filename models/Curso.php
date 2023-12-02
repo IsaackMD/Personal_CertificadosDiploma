@@ -93,5 +93,33 @@
         // INSERT INTO `curso_usu` (`CursoDetalleID`, `CursoID`, `UsuarioID`, `Fecha_Registro`, `Estado`) VALUES (NULL, ?, ?, now(), '1');
 
     }
+
+    public function update_imagen_Curso($CursoID,$Curso_img){
+        $conectar = parent::Conexion();
+        parent::set_names();
+        require_once("Curso.php");
+        $curx = new Curso();
+        $Curso_img = '';
+        if ($_FILES["Curso_img"]["name"]!='') {
+            # code...
+            $Curso_img = $curx->upload_file();
+        }
+        $sql ="UPDATE curso SET Curso_img = ? Where CursoID = ?";
+        $sql=$conectar->prepare($sql);
+        $sql->bindValue(1,$Curso_img);
+        $sql->bindValue(2,$CursoID);
+        $sql->execute();
+        return $sql->fetchAll();
+       
+    }
+    public function upload_file(){
+        if(isset($_FILES["Curso_img"])){
+            $extension = explode('.',$_FILES['Curso_img']['name']);
+            $new_name = rand(). '.' .$extension[1];
+            $destino = '../public/'.$new_name;
+            move_uploaded_file($_FILES['Curso_img']['tmp_name'], $destino);
+            return "../../public/".$new_name;
+        }
+    }
  }
 ?>

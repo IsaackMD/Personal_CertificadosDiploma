@@ -53,6 +53,7 @@
                           <th class="wd-15p">InstructorID</th>
                           <th></th>
                           <th></th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -67,6 +68,8 @@
     <!-- ########## END: MAIN PANEL ########## -->
     <?php require_once('../../view/html/MainJs.php') ?>
     <?php require_once('modalmantenimiento.php') ?>
+    <?php require_once('modalfile.php') ?>
+
 
     <script type="text/javascript" src="adminmntcurso.js"></script>
   </body>

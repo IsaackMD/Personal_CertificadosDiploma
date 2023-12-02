@@ -42,11 +42,12 @@ switch($_GET["op"]){
         foreach($datos as $row){
             $sub_array= array();
             $sub_array[]=$row["Nombre"];
-            $sub_array[]=$row["Titulo"];
+            $sub_array[]='<a href="'.$row["Curso_img"].'" target="_blank">'.strtoupper($row["Titulo"]).'</a>';
             $sub_array[]=$row["Fecha_Ini"];
             $sub_array[]=$row["Fecha_Fin"];
             $sub_array[]=$row["ins_Nombre"]." ".$row["ins_Apellido_P"]." ".$row["ins_Apellido_M"];
             $sub_array[] = '<button type="button" onClick="editar('.$row["CursoID"].');"  id="'.$row["CursoID"].'" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-id-card-o"></i></div></button>';
+            $sub_array[] = '<button type="button" onClick="imagen('.$row["CursoID"].');"  id="'.$row["CursoID"].'" class="btn btn-outline-warning btn-icon"><div><i class=" fa fa-file"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="eliminar('.$row["CursoID"].');"  id="'.$row["CursoID"].'" class="btn btn-outline-danger btn-icon"><div><i class=" fa fa-regular fa-trash"></i></div></button>';
             $data[]= $sub_array;
 
@@ -99,5 +100,8 @@ switch($_GET["op"]){
         foreach($datos as $row){
             $curso->insert_CS($_POST['CursoID'],$row);
         }
+        break;
+    case "update_img_Curso":
+        $curso->update_imagen_Curso($_POST["CursoxID"],$_POST["Curso_img"]);
         break;
 }

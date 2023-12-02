@@ -1,19 +1,14 @@
 const canvas = document.getElementById('canvaCert');
 const ctx = canvas.getContext('2d');
 const image = new Image();
-image.src = '../../public/Certificado.png';
+
 
 $(document).ready(function(){
     var CursoDetalleID = getUrlParameter('CursoDetalleID');
 
     $.post("../../controller/usuario.php?op=mostrar_CursoDetalle",{CursoDetalleID: CursoDetalleID}, function(data) {
         data= JSON.parse(data);
-        console.log(data);
-        $('#Descripcion').html(data.Descripcion);
-
-
-
-
+        image.src = data.Curso_img;
         ctx.drawImage(image,0,0, canvas.width, canvas.height);
         ctx.font='45px Time new Roma';
         ctx.textAlign = 'center';
@@ -24,16 +19,23 @@ $(document).ready(function(){
         ctx.font='20px Time new Roma';
         ctx.fillText(data.Titulo,x+25,572);
         ctx.fillText('Fecha De Inicio: '+data.Fecha_Ini,x-180,615);
-
         ctx.fillText('Fecha De Finalización: '+data.Fecha_Fin,x+185,615);
         ctx.fillText(data.ins_Nombre+' '+data.ins_Apellido_P+' '+data.ins_Apellido_M,x,770);
+        $('#Descripcion').html(data.Descripcion);
     });
-})
 
+});
+
+window.onload = function() {
+    if(!window.location.hash) {
+        window.location = window.location + '#loaded';
+        window.location.reload();
+    }
+}
 
 $(document).on("click",'#btn_png', function() {
     let lblpng = document.createElement('a');
-    lblpng.download="certificado.png";
+    lblpng.download=data.Curso_img;
     lblpng.href= canvas.toDataURL();
     lblpng.click();
 });

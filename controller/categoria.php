@@ -36,6 +36,7 @@ switch($_GET["op"]){
             $sub_array[]=$row["Nombre"];
             $sub_array[] = '<button type="button" onClick="editar('.$row["CategoriaID"].');"  id="'.$row["CategoriaID"].'" class="btn btn-outline-secondary btn-icon"><div><i class="fa fa-edit"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="eliminar('.$row["CategoriaID"].');"  id="'.$row["CategoriaID"].'" class="btn btn-outline-danger btn-icon"><div><i class=" fa fa-regular fa-trash"></i></div></button>';
+            
             $data[]= $sub_array;
 
         }

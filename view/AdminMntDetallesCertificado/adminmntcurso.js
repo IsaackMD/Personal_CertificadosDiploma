@@ -5,6 +5,10 @@ function init(){
     $("#cursos_form").on("submit",function(e){
         guardaryeditar(e);
     });
+
+    $("#detalle_form").on("submit",function(e){
+      guardaryeditarimg(e);
+  });
 }
 
 function guardaryeditar(e){
@@ -147,6 +151,35 @@ function nuevo(){
     $('#lbltitulo').html('Nuevo Registros');
     $('#cursos_form')[0].reset();
     $('#modalmantenimiento').modal('show');
+}
+
+function imagen(CursoID){
+  $("#CursoxID").val(CursoID);
+       
+  $('#modalfile').modal('show');
+}
+
+function guardaryeditarimg(e){
+  e.preventDefault();
+  var formData = new FormData ($('#detalle_form')[0]);
+  $.ajax({
+      url:'../../controller/curso.php?op=update_img_Curso',
+      type: "POST",
+      data: formData,
+      contentType: false,
+      processData:false,
+      success: function(data){
+        $('#detalle_form').DataTable().ajax.reload();
+           
+          Swal.fire({
+            title: 'Guardado!',
+            text: 'El Registro Fue Exitoso.',
+            icon: 'success',
+            confirmButtonText: 'Entendido'
+          });
+          $('#modalfile').modal('hide');
+        }
+  });
 }
 
 init();
