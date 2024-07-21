@@ -28,9 +28,11 @@
     <link href="../../public/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../../public/lib/Ionicons/css/ionicons.css" rel="stylesheet">
     <link href="../../public/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
-    <link href="../../public/lib/jquery-switchbutton/jquery.switchButton.css" rel="stylesheet">
+    <link href="../../public/lib/jquery-switchbutton/jquery.switchButton.js" rel="stylesheet">
 
     <!-- Bracket CSS -->
     <link href="../../public/css/bracket.css" rel="stylesheet">
     <link href="../../public/lib/datatables/jquery.dataTables.css" rel="stylesheet">
     <link href="../../public/datatables/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="../../public/datatables/jquery.dataTables.min.css" rel="stylesheet">
+    <!-- <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet"> -->

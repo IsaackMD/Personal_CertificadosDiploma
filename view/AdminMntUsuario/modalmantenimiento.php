@@ -1,45 +1,66 @@
 <div id ="modalmantenimiento" class="modal fade" data-backdrop ="static" ata-keyboard ="false">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg " role="document">
         <div class="modal-content bd-0">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 id="lbltitulo" class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"></h6>
             </div>
                 <form method="post" id="usuario_form">
-                <div class="modal-body pd-25">
+                <div class="modal-body ">
                 <input type="hidden" name="UsuarioID" id="UsuarioID"/>
-                    <div class="col-lg-12">
+                <div class="row row-xs">
+                    <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label">Nombre: <span class="tx-danger">*</span></label>
                             <input class="form-control tx-uppercase" id="usu_Nombre" type="text" name="usu_Nombre" required/>
                         </div>
+                    </div>
+                    <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label">Apellido Paterno: <span class="tx-danger">*</span></label>
                             <input class="form-control tx-uppercase" id="usu_Apellido_P" type="text" name="usu_Apellido_P" required/>
                         </div>
+                    </div>
+                    <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label">Apellido Materno: <span class="tx-danger">*</span></label>
                             <input class="form-control tx-uppercase" id="usu_Apellido_M" type="text" name="usu_Apellido_M" required/>
                         </div>
+                    </div>
+                    <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label">Correo: <span class="tx-danger">*</span></label>
                             <input class="form-control tx-uppercase" id="Correo" type="text" name="Correo" required/>
                         </div>
+                    </div>
+                    <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label">Contraseña: <span class="tx-danger">*</span></label>
                             <input class="form-control tx-uppercase" id="Password" type="text" name="Password" required/>
                         </div>
+                    </div>
+                    <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label">Telefono: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="Telefono" type="text" name="Sexo" required/>
+                            <input class="form-control tx-uppercase" id="telefono" type="text" name="telefono" required/>
                         </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label">DNI: <span class="tx-danger">*</span></label>
+                            <input class="form-control tx-uppercase" id="dni" type="text" name="dni" required/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label">Sexo: <span class="tx-danger">*</span></label>
-                            <select class="form-control select2 select2-hidden-accessible" name= "Telefono" id="Sexo" data-placeholder="Seleccione" tabindex="-1" aria-hidden="true">
+                            <select class="form-control select2 select2-hidden-accessible" name= "Sexo" id="Sexo" data-placeholder="Seleccione" tabindex="-1" aria-hidden="true">
                                 <option label="Seleccione"></option>
                                 <option value="H">Hombre</option>
                                 <option value="M">Mujer</option>
                             </select>
                         </div>
+                    </div>
+                    <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label">Rol: <span class="tx-danger">*</span></label>
                             <select class="form-control select2 select2-hidden-accessible" name= "Rol_ID" id="Rol_ID" data-placeholder="Seleccione" tabindex="-1" aria-hidden="true">
@@ -48,6 +69,7 @@
                                 <option value="2">Administrador</option>
                             </select>
                         </div>
+                    </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" name="action" value="add"  class="btn btn-outline-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"> <i class="fa fa-check"></i> Guardar</button>

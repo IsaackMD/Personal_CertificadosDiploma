@@ -1,6 +1,7 @@
 const canvas = document.getElementById('canvaCert');
 const ctx = canvas.getContext('2d');
 const image = new Image();
+const imageqr = new Image();
 
 
 $(document).ready(function(){
@@ -21,6 +22,8 @@ $(document).ready(function(){
         ctx.fillText('Fecha De Inicio: '+data.Fecha_Ini,x-180,615);
         ctx.fillText('Fecha De Finalización: '+data.Fecha_Fin,x+185,615);
         ctx.fillText(data.ins_Nombre+' '+data.ins_Apellido_P+' '+data.ins_Apellido_M,x,770);
+        imageqr.src= "../../public/qr/"+CursoDetalleID+".png";
+        ctx.drawImage(imageqr,530,335, 100, 100);
         $('#Descripcion').html(data.Descripcion);
     });
 

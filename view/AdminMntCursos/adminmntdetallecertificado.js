@@ -190,7 +190,6 @@ function registrar(){
             UsuarioID.push([id]);
         }
     });
-    console.log(UsuarioID);
     if(UsuarioID == 0){
         Swal.fire({
             icon: "error",
@@ -198,23 +197,44 @@ function registrar(){
             text: "Seleccione al menos un usuario.!"
           });
     }else{
-        FormData = new FormData($("#form_detalle")[0]);
-        FormData.append('CursoID',CursoID);
-        FormData.append('UsuarioID',UsuarioID);
+        const formData = new FormData($("#form_detalle")[0]);
+        formData.append('CursoID',CursoID);
+        formData.append('UsuarioID',UsuarioID);
+
         $.ajax({
-            url: '../../controller/curso.php?op=insertDU',
+            url: "../../controller/curso.php?op=insert_curso_usuario",
             type: "POST",
-            data: FormData,
+            data: formData,
             contentType: false,
             processData: false,
+            success : function(data) {
+                data = JSON.parse(data);
+
+                data.forEach(e => {
+                    e.forEach(i => {
+                        console.log(i['CursoDetalleID']);
+                        $.ajax({
+                            type: "POST",
+                            url: "../../controller/curso.php?op=generar_qr",
+                            data: { CursoDetalleID: i['CursoDetalleID'] },
+                            dataType: "JSON",
+                            success: function (response) {
+                                console.log("Código QR generado con éxito");
+                            },
+                        });
+                    });
+                });
+            }
         });
+
+        /* Recargar datatable de los usuarios del curso */
         $('#detalle_data').DataTable().ajax.reload();
+
         $('#usuario_data').DataTable().ajax.reload();
+        /* ocultar modal */
         $('#modalmantenimiento').modal('hide');
-        Swal.fire({
-            icon: "success",
-            title: "Registro Exito!  ",
-            text: "El Usuario Se Agrego Al Curso Con Exito"
-          });
+
     }
 }
+
+

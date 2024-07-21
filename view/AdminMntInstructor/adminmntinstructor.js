@@ -102,7 +102,7 @@ function eliminar(InstructorID){
         },
         buttonsStyling: false
       })
-      
+
       swalWithBootstrapButtons.fire({
         title: 'Estas Seguro.?',
         text: "No Será Posible Revertirlo.!",

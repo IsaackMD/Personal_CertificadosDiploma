@@ -42,6 +42,7 @@
         <p class="mg-b-0">Listado de Usuarioes</p>
 
         <button  class="btn btn-outline-primary m-2" id ="add_button" onclick = "nuevo()" ><i class="fa fa-plus-square">Nueva Usuario</i></button>
+        <button  class="btn btn-outline-info" id ="btnSubir" ><i class="fa fa-plus-square"> Subir</i></button>
                   <div class="table-wrapper">
                     <table id="usuario_data" class="table display responsive nowrap">
                       <thead>
@@ -57,7 +58,6 @@
                         </tr>
                       </thead>
                       <tbody>
-
                       </tbody>
                     </table>
                   </div>
@@ -68,8 +68,11 @@
     <!-- ########## END: MAIN PANEL ########## -->
     <?php require_once('../../view/html/MainJs.php') ?>
     <?php require_once('modalmantenimiento.php') ?>
+    <?php require_once('modalExcel.php') ?>
 
     <script type="text/javascript" src="adminmntusuario.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
   </body>
 </html>
 

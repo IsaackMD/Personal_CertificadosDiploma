@@ -91,11 +91,9 @@
           </div><!-- form-group -->
           <div class="form-group">
             <input id="Password" name="Password" type="password" class="form-control" placeholder="Ingrese Contraseña">
-            <a href="" class="tx-info tx-12 d-block mg-t-10">Olvidaste Tu Contraseña?</a>
           </div><!-- form-group -->
             <input type="hidden" name ="enviar" class="form-control" value="si">
             <button type="submit" class="btn btn-info btn-block">Iniciar</button>
-          <div class="mg-t-60 tx-center">No Tienes Cuenta? <a href="" class="tx-info">Registrar</a></div>
         </div><!-- login-wrapper -->
       </form>
 

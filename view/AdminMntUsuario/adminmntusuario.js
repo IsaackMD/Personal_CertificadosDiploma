@@ -9,7 +9,6 @@ function init(){
 function guardaryeditar(e){
     e.preventDefault();
     var formData = new FormData ($('#usuario_form')[0]);
-
     $.ajax({
         url:'../../controller/usuario.php?op=guardayedita',
         type: "POST",
@@ -30,8 +29,6 @@ function guardaryeditar(e){
 }
 
 $(document).ready(function(){
-
-
     $('#usuario_data').DataTable({
         "aProcessing": true,
         "aServerSide": true,
@@ -88,10 +85,11 @@ function editar(UsuarioID){
         $("#usu_Apellido_P").val(data.usu_Apellido_P);
         $("#usu_Apellido_M").val(data.usu_Apellido_M);
         $("#Correo").val(data.Correo);
-        $("#Telefono").val(data.Telefono);
+        $("#telefono").val(data.telefono);
         $("#Sexo").val(data.Sexo);
         $("#Password").val(data.Password);
         $("#Rol_ID").val(data.Rol_ID);
+        $("#dni").val(data.dni);
     });
     $('#lbltitulo').html('Editar Registros');
     $('#modalmantenimiento').modal('show');
@@ -141,6 +139,71 @@ function nuevo(){
     $('#usuario_form')[0].reset();
     $('#modalmantenimiento').modal('show');
 }
+
+$(document).on("click","#btnSubir",function(){
+  $('#modalExcel').modal('show');
+});
+
+$(document).on("click","#btnsubir",function(){
+
+  
+});
+
+
+var ExcelToJSON = function() {
+
+  this.parseExcel = function(file) {
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+          var data = e.target.result;
+          var workbook = XLSX.read(data, {
+              type: 'binary'
+          });
+          workbook.SheetNames.forEach(function(sheetName) {
+              var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+              var json_object = JSON.stringify(XL_row_object);
+              UserList = JSON.parse(json_object);
+              console.log(UserList)
+              for (i = 0; i < UserList.length; i++) {
+
+                  var columns = Object.values(UserList[i])
+                  $.post("../../controller/usuario.php?op=guardaExcel",{
+                    usu_Nombre: columns[0],
+                    usu_Apellido_P: columns[1],
+                    usu_Apellido_M: columns[2],
+                    Correo: columns[3],
+                    telefono: columns[4],
+                    Password: columns[5],
+                    Sexo: columns[6],
+                    Rol_ID: columns[7],
+                    dni: columns[8]
+                  }, function(data){
+                      console.log(data);
+                  });
+              }
+              document.getElementById("upload").value=null;
+              $("#usuario_data").DataTable().ajax.reload();
+              $('#modalExcel').modal('hide');
+
+          })
+      };
+      reader.onerror = function(ex) {
+          console.log(ex);
+      };
+
+      reader.readAsBinaryString(file);
+  };
+};
+
+function handleFileSelect(evt) {
+
+  var files = evt.target.files; // FileList object
+  var xl2json = new ExcelToJSON();
+  xl2json.parseExcel(files[0]);
+}
+
+document.getElementById('upload').addEventListener('change', handleFileSelect, false);
 
 init();
 

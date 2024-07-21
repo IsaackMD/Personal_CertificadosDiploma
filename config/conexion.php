@@ -19,7 +19,7 @@
             return $this->dbh->query("SET NAMES 'utf8'");
         }
         public static function ruta(){
-            return "http://localhost/Personal_CertificadosDiploma/";
+            return "http://127.0.0.1/Personal_CertificadosDiploma/";
         }
     }
 

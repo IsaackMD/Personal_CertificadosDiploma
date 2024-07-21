@@ -81,10 +81,21 @@
 
         }
 
-        public function insert_usuario($nom,$ap,$am,$correo,$tel,$pass,$s,$rol){
+        public function get_usu_x_dni($dni){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="Insert into usuario (usu_Nombre,usu_Apellido_P,usu_Apellido_M,Correo,Telefono,Password,Sexo,Fecha_Registro,Estado,Rol_ID) value (?,?,?,?,?,?,?,now(),1,?);";
+            $sql = "select * from usuario WHERE Estado = 1 and dni=?;";
+            $sql = $conectar->prepare($sql);
+            $sql->bindValue(1,$dni);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+
+        }
+
+        public function insert_usuario($nom,$ap,$am,$correo,$tel,$pass,$s,$rol,$dni){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="INSERT INTO `usuario`(`usu_Nombre`, `usu_Apellido_P`, `usu_Apellido_M`, `Correo`, `Telefono`, `Password`, `Sexo`, `Fecha_Registro`, `Estado`, `Rol_ID`, `dni`) VALUES (?,?,?,?,?,?,?,now(),1,?,?)";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1,$nom);
             $sql->bindValue(2,$ap);
@@ -94,24 +105,26 @@
             $sql->bindValue(6,$pass);
             $sql->bindValue(7,$s);
             $sql->bindValue(8,$rol);
+            $sql->bindValue(9,$dni);
             $sql->execute();
             return $sql->fetchAll();
         }
         
-        public function update_usu($usuid,$nom,$ap,$am,$correo,$pass,$tel,$sexo,$rol){
+        public function update_usu($usuid,$nom,$ap,$am,$correo,$pass,$tel,$sexo,$rol,$dni){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="call actualizar_usu2(?,?,?,?,?,?,?,?,?);";
+            $sql="Update usuario set usu_Nombre = ?, usu_Apellido_P = ?, usu_Apellido_M = ?,Correo =?, Password = ?, Sexo = ?, Telefono = ? ,Rol_ID=?, Estado = 1 , dni = ? where UsuarioID = ?;";
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1,$usuid);
-            $sql->bindValue(2,$nom);
-            $sql->bindValue(3,$ap);
-            $sql->bindValue(4,$am);
-            $sql->bindValue(5,$correo);
-            $sql->bindValue(6,$pass);
-            $sql->bindValue(7,$sexo);
-            $sql->bindValue(8,$tel);
-            $sql->bindValue(9,$rol);
+            $sql->bindValue(1,$nom);
+            $sql->bindValue(2,$ap);
+            $sql->bindValue(3,$am);
+            $sql->bindValue(4,$correo);
+            $sql->bindValue(5,$pass);
+            $sql->bindValue(6,$sexo);
+            $sql->bindValue(7,$tel);
+            $sql->bindValue(8,$rol);
+            $sql->bindValue(9,$dni);
+            $sql->bindValue(10,$usuid);
             $sql->execute();
             return $sql->rowCount();
         }

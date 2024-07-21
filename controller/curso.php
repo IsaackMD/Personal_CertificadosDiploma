@@ -95,12 +95,32 @@ switch($_GET["op"]){
             echo json_encode($results);
             break;
 
-    case "insertDU" :
+    case "insert_curso_usuario":
+        /*TODO: Array de usuario separado por comas */
         $datos = explode(',', $_POST['UsuarioID']);
+        /*TODO: Registrar tantos usuarios vengan de la vista */
+        $data = Array();
         foreach($datos as $row){
-            $curso->insert_CS($_POST['CursoID'],$row);
+            $sub_array = array();
+            $idx=$curso->insert_CS($_POST["CursoID"],$row);
+            $sub_array[] = $idx;
+            $data[] = $sub_array;
         }
+        echo json_encode($data);
         break;
+
+    case "generar_qr":
+       
+        require 'phpqrcode/qrlib.php';
+        //Primer Parametro - Text del QR
+        //Segundo Parametro - Ruta donde se guardara el archivo
+        try {
+            QRcode::png(conectar::ruta()."view/Certificado/index.php?CursoDetalleID=".$_POST["CursoDetalleID"],"../public/qr/".$_POST["CursoDetalleID"].".png",'L',32,5);
+            echo json_encode(["success" => "a"]);
+        } catch (Exception $e) {
+            echo json_encode(["error" => "Error al generar el código QR: " . $e->getMessage()]);
+        }break;
+
     case "update_img_Curso":
         $curso->update_imagen_Curso($_POST["CursoxID"],$_POST["Curso_img"]);
         break;

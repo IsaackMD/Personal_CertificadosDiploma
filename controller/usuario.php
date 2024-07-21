@@ -50,6 +50,7 @@ $usuario = new Usuario();
                     $output["ins_Apellido_M"] = $row["ins_Apellido_M"];
 
                 }
+                
                 echo json_encode($output);
             }
             break;
@@ -86,7 +87,7 @@ $usuario = new Usuario();
 
 
 
-        case "mostrar":
+        case "mostrar": 
             $datos = $usuario->get_usu_x_id($_POST["UsuarioID"]);
             if(is_array($datos)==true and count($datos)<>0){
                 foreach($datos as $row){
@@ -96,9 +97,28 @@ $usuario = new Usuario();
                     $output["usu_Apellido_M"] = $row["usu_Apellido_M"];
                     $output["Correo"] = $row["Correo"];
                     $output["Password"] = $row["Password"];
-                    $output["Telefono"] = $row["Telefono"];
+                    $output["telefono"] = $row["Telefono"];
                     $output["Sexo"] = $row["Sexo"];
                     $output["Rol_ID"] = $row["Rol_ID"];
+                    $output["dni"] = $row["dni"];
+                }
+                echo json_encode($output);
+            }
+            break;
+        case "consulta_dni":
+            $datos = $usuario->get_usu_x_dni($_POST["dni"]);
+            if(is_array($datos)==true and count($datos)<>0){
+                foreach($datos as $row){
+                    $output["UsuarioID"] = $row["UsuarioID"];
+                    $output["usu_Nombre"] = $row["usu_Nombre"];
+                    $output["usu_Apellido_P"] = $row["usu_Apellido_P"];
+                    $output["usu_Apellido_M"] = $row["usu_Apellido_M"];
+                    $output["Correo"] = $row["Correo"];
+                    $output["Password"] = $row["Password"];
+                    $output["telefono"] = $row["Telefono"];
+                    $output["Sexo"] = $row["Sexo"];
+                    $output["Rol_ID"] = $row["Rol_ID"];
+                    $output["dni"] = $row["dni"];
                 }
                 echo json_encode($output);
             }
@@ -106,10 +126,11 @@ $usuario = new Usuario();
         case "guardayedita":
             if(empty($_POST["UsuarioID"])){
 
-                $usuario->insert_usuario($_POST["usu_Nombre"],$_POST["usu_Apellido_P"],$_POST["usu_Apellido_M"],$_POST["Correo"],$_POST["Telefono"],$_POST["Password"],$_POST["Sexo"],$_POST["Rol_ID"]);
-            }else{ //$usuid,$nom,$ap,$am,$correo,$pass,$sexo,$tel,$rol
-                $usuario->update_usu($_POST["UsuarioID"],$_POST["usu_Nombre"],$_POST["usu_Apellido_P"],$_POST["usu_Apellido_M"],$_POST["Correo"],$_POST["Password"],$_POST["Telefono"],$_POST["Sexo"],$_POST["Rol_ID"]);
+                $usuario->insert_usuario($_POST["usu_Nombre"],$_POST["usu_Apellido_P"],$_POST["usu_Apellido_M"],$_POST["Correo"],$_POST["telefono"],$_POST["Password"],$_POST["Sexo"],$_POST["Rol_ID"],$_POST["dni"]);
+            }else{ 
+                $usuario->update_usu($_POST["UsuarioID"],$_POST["usu_Nombre"],$_POST["usu_Apellido_P"],$_POST["usu_Apellido_M"],$_POST["Correo"],$_POST["Password"],$_POST["telefono"],$_POST["Sexo"],$_POST["Rol_ID"],$_POST["dni"]);
             }
+            break;
         case "update_perfil":
             $usuario->update_usu_perfil(
                 $_POST["UsuarioID"],
@@ -117,7 +138,7 @@ $usuario = new Usuario();
                 $_POST["usu_Apellido_P"],
                 $_POST["usu_Apellido_M"],
                 $_POST["Password"],
-                $_POST["Telefono"],
+                $_POST["telefono"],
                 $_POST["Sexo"]
             );
             break;
@@ -172,7 +193,10 @@ $usuario = new Usuario();
                 echo json_encode($results);
             break;
 
-}
+        case "guardaExcel":
+                $usuario->insert_usuario($_POST["usu_Nombre"],$_POST["usu_Apellido_P"],$_POST["usu_Apellido_M"],$_POST["Correo"],$_POST["telefono"],$_POST["Password"],$_POST["Sexo"],$_POST["Rol_ID"],$_POST["dni"]);
+            break;
+        }
 
 
 

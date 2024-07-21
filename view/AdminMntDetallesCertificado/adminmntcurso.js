@@ -155,7 +155,6 @@ function nuevo(){
 
 function imagen(CursoID){
   $("#CursoxID").val(CursoID);
-       
   $('#modalfile').modal('show');
 }
 
@@ -170,7 +169,7 @@ function guardaryeditarimg(e){
       processData:false,
       success: function(data){
         $('#detalle_form').DataTable().ajax.reload();
-           
+        
           Swal.fire({
             title: 'Guardado!',
             text: 'El Registro Fue Exitoso.',
