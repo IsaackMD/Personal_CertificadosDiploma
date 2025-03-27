@@ -1,14 +1,14 @@
 ﻿# Personal_CertificadosDiploma
 Este proyecto es el resultado del curso de "Generación de Certificados y Diplomas con PHP, MySQL y JS". Se trata de un sistema web desarrollado desde cero utilizando tecnologías modernas y buenas prácticas en el desarrollo web. El sistema permite la gestión y generación de certificados y diplomas de manera dinámica, con un enfoque en la automatización y optimización de procesos.
 
-﻿## Tecnologías Utilizadas
+﻿# Tecnologías Utilizadas
 -Backend: PHP (POO, PDO)
 -Base de Datos: MySQL (Administrado con PhpMyAdmin)
 -Frontend: HTML5, CSS3, Bootstrap
 -Interactividad y Dinamismo: JavaScript, JQuery, Ajax, JSON
 -Gestión y Organización: Gantt, Kanban
 
-﻿## Características del Proyecto
+﻿# Características del Proyecto
  -Diseño Responsivo: Adaptado para visualizarse en cualquier dispositivo.
 -Gestión de Usuarios: Control de accesos y permisos.
 -CRUD Completo: Creación, lectura, actualización y eliminación de registros.
